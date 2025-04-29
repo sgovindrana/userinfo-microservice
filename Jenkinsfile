@@ -37,7 +37,7 @@ pipeline {
                 script {
                     def token = "squ_492ae6761517bc2aa09e2a54b82fe9fd43e6961e"
                     def sonarQubeUrl = "http://15.237.251.132:9000/api"
-                    def componentKey = "com.project:restaurantlisting"
+                    def componentKey = "com.project:userinfo"
                     def coverageThreshold = 75.0
 
                     def response = sh (
@@ -63,8 +63,8 @@ pipeline {
       stage('Docker Build and Push') {
       steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-          sh 'docker build -t govindrana/restaurantlisting:${VERSION} .'
-          sh 'docker push govindrana/restaurantlisting:${VERSION}'
+          sh 'docker build -t govindrana/userinfo:${VERSION} .'
+          sh 'docker push govindrana/userinfo:${VERSION}'
       }
     }
 
@@ -83,7 +83,7 @@ pipeline {
          checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[ credentialsId: 'git-ssh', url: 'git@github.com:sgovindrana/deployment-configurations.git']])
         script {
        sh '''
-          sed -i "s/image:.*/image: govindrana\\/restaurantlisting:${VERSION}/" aws/restaurant-manifest.yml
+          sed -i "s/image:.*/image: govindrana\\/userinfo:${VERSION}/" aws/userinfo-manifest.yml
         '''
           sh 'git checkout master'
           sh 'git add .'
