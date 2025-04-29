@@ -24,9 +24,4 @@ public class UserController {
     public ResponseEntity<UserDTO> fetchUserDetailsById(@PathVariable Integer userId){
         return userService.fetchUserDetailsById(userId);
     }
-
-
-
-
-
 }
