@@ -2,7 +2,7 @@ server:
   port: 9093
 
 spring:
-  profile:
+  profiles:
     active: dev
   application:
     name: USER-SERVICE  # Correct placement of application name
